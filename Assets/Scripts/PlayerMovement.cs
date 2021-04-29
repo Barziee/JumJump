@@ -5,13 +5,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public LayerMask groundMask;
 
+    [SerializeField] private bool isGrounded;
     public float moveSpeed;
     public float moveInput;
-    [SerializeField] private bool isGrounded;
-
     public bool canJump = true;
     public float jumpValue = 0f;
-
+    public float jumpHeight = 10f;
 
     void Start()
     {
@@ -35,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
             jumpValue += 0.1f;
         }
 
-        if (jumpValue >= 20f && isGrounded)
+        if (jumpValue >= jumpHeight && isGrounded)
         {
             float tempX = moveInput * moveSpeed;
             float tempY = jumpValue;
@@ -74,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f), new Vector2(0.9f, 0.2f));
+        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f), new Vector2(0.9f, 0.2f));
     }
 
 }
