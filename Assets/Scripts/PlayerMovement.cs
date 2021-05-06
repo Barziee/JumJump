@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour
+using Photon.Pun;
+public class PlayerMovement : MonoBehaviourPun
 {
     private Rigidbody2D rb;
     public LayerMask groundMask;
@@ -11,20 +11,35 @@ public class PlayerMovement : MonoBehaviour
     public bool canJump = true;
     public float jumpValue = 0f;
     public float jumpHeight = 10f;
+    public bool isGameStarted;
 
-    void Start()
+  
+    public void InitMovement()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-    }
 
+        rb = gameObject.GetComponent<Rigidbody2D>();
+
+        if (!rb)
+            Debug.LogError("PlayerMovement: Rigidbody not found!");
+    }
     void Update()
     {
+        if (isActiveAndEnabled == false || isGameStarted == false 
+            || (photonView.IsMine == false && PhotonNetwork.IsConnected == true))
+            return;
+
+        if (rb == null)
+            InitMovement();
+
+
+
         moveInput = Input.GetAxisRaw("Horizontal");
 
         isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f),
         new Vector2(0.9f, 0.4f), 0f, groundMask);
 
         JumpLogic();
+      //  Debug.Log(rb.velocity);
     }
 
     private void JumpLogic()
@@ -75,5 +90,4 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f), new Vector2(0.9f, 0.2f));
     }
-
 }
