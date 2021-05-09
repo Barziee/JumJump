@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviourPun
 
         if (!rb)
             Debug.LogError("PlayerMovement: Rigidbody not found!");
+      
     }
     void Update()
     {
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviourPun
 
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f),
+        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.3f),
         new Vector2(0.9f, 0.4f), 0f, groundMask);
 
         JumpLogic();
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviourPun
             float tempX = moveInput * moveSpeed;
             float tempY = jumpValue;
             rb.velocity = new Vector2(tempX, tempY);
-            Invoke("JumpReset", 0.2f);
+            Invoke("JumpReset", 0.1f);
         }
 
         if (Input.GetKeyUp("space"))
