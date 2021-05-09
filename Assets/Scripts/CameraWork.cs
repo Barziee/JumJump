@@ -43,7 +43,7 @@ namespace Photon.Pun.Demo.PunBasics
         void Start()
         {
             // Start following the target if wanted.
-            if (followOnStart)
+            if (followOnStart )
             {
                 OnStartFollowing();
             }

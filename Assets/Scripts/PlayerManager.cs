@@ -38,7 +38,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
     {
 
         if (photonView.IsMine)
+        {
             PlayerManager.LocalPlayerInstance = this.gameObject;
+            Photon.Pun.Demo.PunBasics.CameraWork.Instance.OnStartFollowing();
+        }
         else
             Debug.Log("PlayerManager Awake() : Not Local Client");
 
