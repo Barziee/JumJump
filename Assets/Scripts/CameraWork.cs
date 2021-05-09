@@ -20,21 +20,28 @@ namespace Photon.Pun.Demo.PunBasics
 
         [SerializeField] CinemachineVirtualCamera cinemaMachine;
 
-        public static CameraWork Instance;
+        public static CameraWork GetInstance { get {
+                if (Instance == null)
+                    Debug.LogError("CameraWork: Tried to get Instance but it was not assigned");
+
+                return Instance;
+            }
+        }
+        private static CameraWork Instance;
 
         // maintain a flag internally to reconnect if target is lost or camera is switched
         bool isFollowing;
 
 
         #endregion
-
+        public bool SetFollowOnStart { set => followOnStart = value; }
 
         #region MonoBehaviour Callbacks
 
         private void Awake()
         {
             Instance = this;
-            if (!Instance)
+            if (!GetInstance)
             Debug.LogError("CameraWork: Instance was not assigned!");
         }
         /// <summary>
@@ -42,7 +49,7 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
         {
-            isFollowing = false;
+            cinemaMachine = GetComponent<CinemachineVirtualCamera>();
             // Start following the target if wanted.
             if (followOnStart )
             {
@@ -79,6 +86,7 @@ namespace Photon.Pun.Demo.PunBasics
         {
             if (isFollowing == false)
             {
+               
                 playerTransform = PlayerManager.LocalPlayerInstance.transform;
                 
                     cinemaMachine.Follow = playerTransform;

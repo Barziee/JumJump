@@ -40,7 +40,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
         if (photonView.IsMine)
         {
             PlayerManager.LocalPlayerInstance = this.gameObject;
-            Photon.Pun.Demo.PunBasics.CameraWork.Instance.OnStartFollowing();
         }
         else
             Debug.Log("PlayerManager Awake() : Not Local Client");
@@ -51,10 +50,10 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
 
     private void Start()
     {
-        if (Photon.Pun.Demo.PunBasics.CameraWork.Instance != null)
+        if (Photon.Pun.Demo.PunBasics.CameraWork.GetInstance != null)
         {
             if (photonView.IsMine)
-                Photon.Pun.Demo.PunBasics.CameraWork.Instance.OnStartFollowing();
+                Photon.Pun.Demo.PunBasics.CameraWork.GetInstance.OnStartFollowing();
         }
         else
             Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork componenet on player prefab.");
