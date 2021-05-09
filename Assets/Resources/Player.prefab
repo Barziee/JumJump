@@ -145,11 +145,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isGrounded: 0
-  moveSpeed: 10
+  moveSpeed: 5
   moveInput: 0
   canJump: 1
   jumpValue: 0
-  jumpHeight: 15
+  jumpHeight: 7
   isGameStarted: 1
 --- !u!50 &1280078119
 Rigidbody2D:
