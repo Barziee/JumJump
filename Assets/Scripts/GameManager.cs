@@ -59,6 +59,7 @@ namespace Com.MyCompany.MyGame
 
 
         #region Private Methods
+    
          private void LoadArena()
         {
             if (PhotonNetwork.IsMasterClient == false)
@@ -70,9 +71,8 @@ namespace Com.MyCompany.MyGame
             {
                 Debug.LogFormat("Game Is Starting! ");
 
-           //     PhotonNetwork.LoadLevel(); Name of level
-
-
+                if (PhotonNetwork.IsMasterClient)
+                    PhotonNetwork.LoadLevel(2);
             }
         }
 
@@ -95,6 +95,7 @@ namespace Com.MyCompany.MyGame
             }
 
         }
+     
         #endregion
 
 

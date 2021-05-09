@@ -30,11 +30,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
         {
             // recieve inputs in the same order as sending!
         }
-
-
-
-
-
     }
     #endregion
 
@@ -86,9 +81,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
             _playerMovement.InitMovement();
         }
 
-
-
-
+  
+  
 
 #if UNITY_5_4_OR_NEWER
             // Unity 5.4 has a new scene management. register a method to call CalledOnLevelWasLoaded.
