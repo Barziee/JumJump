@@ -42,6 +42,7 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
         {
+            isFollowing = false;
             // Start following the target if wanted.
             if (followOnStart )
             {
@@ -79,14 +80,19 @@ namespace Photon.Pun.Demo.PunBasics
             if (isFollowing == false)
             {
                 playerTransform = PlayerManager.LocalPlayerInstance.transform;
-                if (playerTransform != null)
-                {
+                
                     cinemaMachine.Follow = playerTransform;
                     isFollowing = true;
-                }
+                
             }
         }
+        public void ResetCameraStats()
+        {
+            if (true)
+            {
 
+            }
+        }
 
         #endregion
 
