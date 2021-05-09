@@ -86,12 +86,15 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         public void OnStartFollowing()
         {
+                Debug.Log("* isFollowing " + isFollowing);
             if (isFollowing == false)
             {
-               
+                Debug.Log("** PlayerManager.LocalPlayerInstance " + PlayerManager.LocalPlayerInstance);
                 playerTransform = PlayerManager.LocalPlayerInstance.transform;
-                
-                    cinemaMachine.Follow = playerTransform;
+                Debug.Log("*** playerTransform " + playerTransform);
+                Debug.Log("**** cinemaMachine " + cinemaMachine);
+                Debug.Log("***** cinemaMachine.Follow " + cinemaMachine.Follow);
+                 cinemaMachine.Follow = playerTransform;
                     isFollowing = true;
                 
             }
