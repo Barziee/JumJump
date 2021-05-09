@@ -49,6 +49,8 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
         {
+            isFollowing = false;
+            playerTransform = null;
             cinemaMachine = GetComponent<CinemachineVirtualCamera>();
             // Start following the target if wanted.
             if (followOnStart )
