@@ -20,6 +20,7 @@ namespace Photon.Pun.Demo.PunBasics
 
         [SerializeField] CinemachineVirtualCamera cinemaMachine;
 
+        private static CameraWork Instance;
         public static CameraWork GetInstance { get {
                 if (Instance == null)
                     Debug.LogError("CameraWork: Tried to get Instance but it was not assigned");
@@ -27,7 +28,6 @@ namespace Photon.Pun.Demo.PunBasics
                 return Instance;
             }
         }
-        private static CameraWork Instance;
 
         // maintain a flag internally to reconnect if target is lost or camera is switched
         bool isFollowing;
@@ -49,9 +49,9 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
         {
-        
+            playerTransform = null;
             // Start following the target if wanted.
-            if (followOnStart )
+            if (!followOnStart)
             {
                 OnStartFollowing();
             }
@@ -84,19 +84,18 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         public void OnStartFollowing()
         {
-                Debug.Log("* isFollowing " + isFollowing);
-            
-                Debug.Log("** PlayerManager.LocalPlayerInstance " + PlayerManager.LocalPlayerInstance);
-                playerTransform = PlayerManager.LocalPlayerInstance.transform;
-                Debug.Log("*** playerTransform " + playerTransform);
-                Debug.Log("**** cinemaMachine " + cinemaMachine);
-                Debug.Log("***** cinemaMachine.Follow " + cinemaMachine.Follow);
-            if (playerTransform != null && PlayerManager.LocalPlayerInstance.transform != null && playerTransform == PlayerManager.LocalPlayerInstance.transform )
+       
+            if (PlayerManager.LocalPlayerInstance.transform != null)
+                        playerTransform = PlayerManager.LocalPlayerInstance.transform;
+
+   
+            if (playerTransform != null && playerTransform == PlayerManager.LocalPlayerInstance.transform )
             {
                  cinemaMachine.Follow = playerTransform;
                     isFollowing = true;
 
             }
+          
         }
         public void ResetCameraStats()
         {
