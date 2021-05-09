@@ -107,12 +107,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
 #endif
     private void CalledOnLevelWasLoaded(int level)
     {
-        // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
-        if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
-            transform.position = new Vector3(0, 5f, 0);
+      //  // check if we are outside the Arena and if it's the case, spawn around the center of the arena in a safe zone
+      //  if (!Physics.Raycast(transform.position, -Vector3.up, 5f))
+      //      transform.position = new Vector3(0, 5f, 0);
 
-        GameObject _uiGo = Instantiate(this._playerUiPrefab);
-      //  _uiGo.GetComponent<PlayerUI>().SetTarget(this); //("SetTarget", this, SendMessageOptions.RequireReceiver);
+      //  GameObject _uiGo = Instantiate(this._playerUiPrefab);
+      ////  _uiGo.GetComponent<PlayerUI>().SetTarget(this); //("SetTarget", this, SendMessageOptions.RequireReceiver);
     }
 #if UNITY_5_4_OR_NEWER
 
