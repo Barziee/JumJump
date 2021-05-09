@@ -49,9 +49,7 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
         {
-            isFollowing = false;
-            playerTransform = null;
-            cinemaMachine = GetComponent<CinemachineVirtualCamera>();
+        
             // Start following the target if wanted.
             if (followOnStart )
             {
@@ -87,16 +85,17 @@ namespace Photon.Pun.Demo.PunBasics
         public void OnStartFollowing()
         {
                 Debug.Log("* isFollowing " + isFollowing);
-            if (isFollowing == false)
-            {
+            
                 Debug.Log("** PlayerManager.LocalPlayerInstance " + PlayerManager.LocalPlayerInstance);
                 playerTransform = PlayerManager.LocalPlayerInstance.transform;
                 Debug.Log("*** playerTransform " + playerTransform);
                 Debug.Log("**** cinemaMachine " + cinemaMachine);
                 Debug.Log("***** cinemaMachine.Follow " + cinemaMachine.Follow);
+            if (playerTransform != null && PlayerManager.LocalPlayerInstance.transform != null && playerTransform == PlayerManager.LocalPlayerInstance.transform )
+            {
                  cinemaMachine.Follow = playerTransform;
                     isFollowing = true;
-                
+
             }
         }
         public void ResetCameraStats()
