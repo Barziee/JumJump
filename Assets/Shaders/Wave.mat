@@ -24,5 +24,9 @@ Material:
         m_Texture: {fileID: 2800000, guid: 44ebd8e6f42cae445ab4b22f0a9b48a0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors: []
+    m_Floats:
+    - Vector1_98AD80B9: -0.13
+    - Vector1_BE129E19: 0.7
+    - Vector1_E50154C6: 0.2
+    m_Colors:
+    - Vector2_51FCB671: {r: 0.5, g: 0.5, b: 0, a: 0}
