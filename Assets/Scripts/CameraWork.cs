@@ -85,14 +85,14 @@ namespace Photon.Pun.Demo.PunBasics
         public void OnStartFollowing()
         {
        
-            if (PlayerManager.LocalPlayerInstance.transform != null)
+            if (PlayerManager.LocalPlayerInstance?.transform != null)
                         playerTransform = PlayerManager.LocalPlayerInstance.transform;
 
    
             if (playerTransform != null && playerTransform == PlayerManager.LocalPlayerInstance.transform )
             {
                  cinemaMachine.Follow = playerTransform;
-                    isFollowing = true;
+                 isFollowing = true;
 
             }
           
