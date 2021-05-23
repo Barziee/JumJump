@@ -3,7 +3,7 @@ using UnityEngine;
 using Photon.Realtime;
 public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
 {
-
+    public static PlayerManager Instance;
 
     #region Private Fields
 
@@ -14,8 +14,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
 
     #endregion
     #region Public Fields
-    public static GameObject LocalPlayerInstance;
+    private static GameObject localPlayerInstance;
+    public static GameObject LocalPlayerInstance
+    {
+        get
+        {
 
+            return localPlayerInstance;
+        }
+    }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -39,7 +46,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
 
         if (photonView.IsMine)
         {
-            PlayerManager.LocalPlayerInstance = this.gameObject;
+            Instance = this;
+            localPlayerInstance = this.gameObject;
         }
         else
             Debug.Log("PlayerManager Awake() : Not Local Client");
