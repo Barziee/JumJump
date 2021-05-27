@@ -11,5 +11,7 @@ public class PlayerSettings : ScriptableObject
 
     [Tooltip("Max Jump Height")]
     public float JumpHeight;
-    
+
+    [Tooltip("Time till player can jump again")]
+    public float JumpCooldown = 0.1f;
 }

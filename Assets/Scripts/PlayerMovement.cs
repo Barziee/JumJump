@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 public class PlayerMovement : MonoBehaviourPun
 {
     private Rigidbody2D rb;
@@ -52,16 +53,17 @@ public class PlayerMovement : MonoBehaviourPun
         if (Input.GetKey("space") && isGrounded && canJump)
         {
             jumpValue += 0.1f;
-        }
 
-        if (jumpValue >= playerSettings.JumpHeight && isGrounded)
-        {
-             tempX = moveInput * playerSettings.MoveSpeed;
-             tempY = jumpValue;
-            rb.velocity = new Vector2(tempX, tempY);
-            Invoke("JumpReset", 0.1f);
-        }
 
+            if (jumpValue >= playerSettings.JumpHeight && isGrounded)
+            {
+                tempX = moveInput * playerSettings.MoveSpeed;
+                tempY = jumpValue;
+                rb.velocity = new Vector2(tempX, tempY);
+                StartCoroutine(JumpReset());
+
+            }
+        }
         if (Input.GetKeyUp("space"))
         {
             if (isGrounded)
@@ -73,19 +75,17 @@ public class PlayerMovement : MonoBehaviourPun
         }
 
         if (Input.GetKeyDown("space") && isGrounded && canJump)
-        {
             rb.velocity = new Vector2(0f, rb.velocity.y);
-        }
+        
 
         if (jumpValue == 0f && isGrounded)
-        {
             rb.velocity = new Vector2(moveInput * playerSettings.MoveSpeed, rb.velocity.y);
 
-        }
+        
     }
-
-    private void JumpReset()
+    IEnumerator JumpReset()
     {
+        yield return new WaitForSeconds(playerSettings.JumpCooldown);
         canJump = false;
         jumpValue = 0;
     }
