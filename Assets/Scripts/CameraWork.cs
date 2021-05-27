@@ -85,7 +85,7 @@ namespace Photon.Pun.Demo.PunBasics
         public void OnStartFollowing()
         {
        
-            if (PlayerManager.LocalPlayerInstance?.transform != null)
+            if (PlayerManager.LocalPlayerInstance != null&& PlayerManager.LocalPlayerInstance?.transform != null)
                         playerTransform = PlayerManager.LocalPlayerInstance.transform;
 
    
@@ -108,4 +108,4 @@ namespace Photon.Pun.Demo.PunBasics
         #endregion
 
     }
-}
+} 

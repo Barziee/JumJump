@@ -3,17 +3,24 @@ using Photon.Pun;
 public class PlayerMovement : MonoBehaviourPun
 {
     private Rigidbody2D rb;
-    public LayerMask groundMask;
+
 
     [SerializeField] private bool isGrounded;
-    public float moveSpeed;
+    [SerializeField] PlayerSettings playerSettings;
+
+
     public float moveInput;
     public bool canJump = true;
     public float jumpValue = 0f;
-    public float jumpHeight = 10f;
+
     public bool isGameStarted;
 
-  
+
+
+    float tempX, tempY;
+
+
+    public bool IsGround { get => isGrounded; set => isGrounded = value; }
     public void InitMovement()
     {
 
@@ -36,9 +43,6 @@ public class PlayerMovement : MonoBehaviourPun
 
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.3f),
-        new Vector2(0.9f, 0.4f), 0f, groundMask);
-
         JumpLogic();
       //  Debug.Log(rb.velocity);
     }
@@ -50,10 +54,10 @@ public class PlayerMovement : MonoBehaviourPun
             jumpValue += 0.1f;
         }
 
-        if (jumpValue >= jumpHeight && isGrounded)
+        if (jumpValue >= playerSettings.JumpHeight && isGrounded)
         {
-            float tempX = moveInput * moveSpeed;
-            float tempY = jumpValue;
+             tempX = moveInput * playerSettings.MoveSpeed;
+             tempY = jumpValue;
             rb.velocity = new Vector2(tempX, tempY);
             Invoke("JumpReset", 0.1f);
         }
@@ -62,7 +66,7 @@ public class PlayerMovement : MonoBehaviourPun
         {
             if (isGrounded)
             {
-                rb.velocity = new Vector2(moveInput * moveSpeed, jumpValue);
+                rb.velocity = new Vector2(moveInput * playerSettings.MoveSpeed, jumpValue);
                 jumpValue = 0f;
             }
             canJump = true;
@@ -75,7 +79,7 @@ public class PlayerMovement : MonoBehaviourPun
 
         if (jumpValue == 0f && isGrounded)
         {
-            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(moveInput * playerSettings.MoveSpeed, rb.velocity.y);
 
         }
     }
@@ -86,9 +90,4 @@ public class PlayerMovement : MonoBehaviourPun
         jumpValue = 0;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawCube(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.2f), new Vector2(0.9f, 0.2f));
-    }
 }

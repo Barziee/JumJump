@@ -27,14 +27,14 @@ public class PowerUp : MonoBehaviour
 
     private IEnumerator SpeedBoost()
     {
-        gameObject.GetComponent<Collider2D>().enabled = false;
-        gameObject.GetComponent<Renderer>().enabled = false;
+        //gameObject.GetComponent<Collider2D>().enabled = false;
+        //gameObject.GetComponent<Renderer>().enabled = false;
 
-        Debug.Log("Speed Boost applied");
-        player.moveSpeed = 20f;
+        //Debug.Log("Speed Boost applied");
+        //player.moveSpeed = 20f;
         yield return new WaitForSeconds(5f);
-        player.moveSpeed = 5f;
-        Debug.Log("Speed Boost ended");
+        //player.moveSpeed = 5f;
+        //Debug.Log("Speed Boost ended");
     }
 
 }

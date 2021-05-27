@@ -6,12 +6,12 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
     public static PlayerManager Instance;
 
     #region Private Fields
-
+    [SerializeField] JumpTrigger _jumpTrigger;
     [SerializeField] GameObject _playerUiPrefab;
     private PlayerMovement _playerMovement;
 
 
-
+    public PlayerMovement PlayerMovement => _playerMovement;
     #endregion
     #region Public Fields
     private static GameObject localPlayerInstance;
@@ -19,7 +19,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
     {
         get
         {
-
             return localPlayerInstance;
         }
     }
@@ -27,11 +26,11 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         // streaming and recieving!
-
+        // float lag = mathf.abs ((float) (photonnetwork.time - info.timestapmp));
 
         if (stream.IsWriting)
         {
-            // send inputs to other clients
+           // send inputs to other clients
         }
         else
         {
@@ -48,6 +47,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks , IPunObservable
         {
             Instance = this;
             localPlayerInstance = this.gameObject;
+            _jumpTrigger.gameObject.SetActive(true);
         }
         else
             Debug.Log("PlayerManager Awake() : Not Local Client");
